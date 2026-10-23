@@ -1,0 +1,844 @@
+[
+  {
+    "id": 1,
+    "title": "Push Pull Legs – Dumbbell",
+    "difficulty": "Beginner–Intermediate",
+    "equipment": "Dumbbells",
+    "days": [
+      {
+        "title": "Day 1 – Push",
+        "exercises": [
+          {
+            "name": "DB Floor Press",
+            "youtubeUrl": "https://youtube.com/shorts/TvPviMnKg6s?si=2vGE8Wab07ZhAxKR"
+          },
+          {
+            "name": "DB Incline Press",
+            "youtubeUrl": "https://youtu.be/jMQA3XtJSgo?si=UvHlHODCC9qG7QW8"
+          },
+          {
+            "name": "DB Shoulder Press",
+            "youtubeUrl": "https://youtu.be/Did01dFR3Lk?si=cSzJh3HZLsWLReY1"
+          },
+          {
+            "name": "DB Lateral Raise",
+            "youtubeUrl": "https://youtu.be/XPPfnSEATJA?si=5hJTXM1OPkefCMrZ"
+          },
+          {
+            "name": "DB Overhead Tricep Extension",
+            "youtubeUrl": "https://youtu.be/a9oPnZReIRE?si=9ja7AMFxK06mZ6I_"
+          },
+          {
+            "name": "Close-Grip Push-ups",
+            "youtubeUrl": "https://youtu.be/2cdIRe5tcqI?si=wUydcycjNsI7hq_3"
+          }
+        ]
+      },
+      {
+        "title": "Day 2 – Pull",
+        "exercises": [
+          {
+            "name": "DB Bent-over Row",
+            "youtubeUrl": "https://youtu.be/6gvmcqr226U?si=Z7I-GON2gJHPFbi_"
+          },
+          {
+            "name": "Single-arm DB Row",
+            "youtubeUrl": "https://youtu.be/ZRSGpBUVcNw?si=Jea0Zxa44AyhjL22"
+          },
+          {
+            "name": "DB Reverse Fly",
+            "youtubeUrl": "https://youtu.be/3gJXpfwg_go?si=NRnn8wWA2z8c9xNZ"
+          },
+          {
+            "name": "DB Shrugs",
+            "youtubeUrl": "https://youtu.be/_t3lrPI6Ns4?si=i7Qo3L2EGheR9MoU"
+          },
+          {
+            "name": "DB Bicep Curl",
+            "youtubeUrl": "https://youtu.be/6DeLZ6cbgWQ?si=BxtHX6J1GiMHKJHX"
+          },
+          {
+            "name": "Hammer Curl",
+            "youtubeUrl": "https://youtube.com/shorts/VuEclXR7sZY?si=C9Gdpfpnql7-VsGI"
+          }
+        ]
+      },
+      {
+        "title": "Day 3 – Legs",
+        "exercises": [
+          {
+            "name": "DB Goblet Squat",
+            "youtubeUrl": "https://youtu.be/meJSJEG_sT0?si=OC_hFUEb6zCieWaz"
+          },
+          {
+            "name": "DB Romanian Deadlift",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=jdf8vJ8_piTreklH"
+          },
+          {
+            "name": "DB Walking Lunges",
+            "youtubeUrl": "https://youtube.com/shorts/mJilHWIBWO8?si=0VduTjQwgK56YTyr"
+          },
+          {
+            "name": "DB Step-ups",
+            "youtubeUrl": "https://youtu.be/9ZknEYboBOQ?si=mpTeAvlJNksyFBX9"
+          },
+          {
+            "name": "DB Calf Raises",
+            "youtubeUrl": "https://youtube.com/shorts/a-x_NR-ibos?si=QvTCFLIyWnUES3aZ"
+          },
+          {
+            "name": "Glute Bridge (weighted)",
+            "youtubeUrl": "https://youtube.com/shorts/euDIvpBWmDg?si=BwQZfUnuQGVnyreq"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/TvPviMnKg6s/hqdefault.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Push Pull Legs – Bodyweight",
+    "difficulty": "Beginner",
+    "equipment": "Bodyweight",
+    "days": [
+      {
+        "title": "Day 1 – Push",
+        "exercises": [
+          {
+            "name": "Push-ups",
+            "youtubeUrl": "https://youtu.be/WDIpL0pjun0?si=VCia2vtzMwEEyq-x"
+          },
+          {
+            "name": "Decline Push-ups",
+            "youtubeUrl": "https://youtu.be/QBlYp-EwHlo?si=BS6VgOzhMjw8sXFL"
+          },
+          {
+            "name": "Pike Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/jz_Vr4JbUjc?si=2EAyFiouPsPMmznp"
+          },
+          {
+            "name": "Bench / Chair Dips",
+            "youtubeUrl": "https://youtube.com/shorts/IHfgaD9SiWU?si=7pCUNJ--FwOchUuv"
+          },
+          {
+            "name": "Diamond Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/PPTj-MW2tcs?si=ywWk3yV1kKHws5ZC"
+          },
+          {
+            "name": "Wall Handstand Hold",
+            "youtubeUrl": "https://youtu.be/WxgJS48wf1M?si=LegEVm39IRUdZGVE"
+          }
+        ]
+      },
+      {
+        "title": "Day 2 – Pull",
+        "exercises": [
+          {
+            "name": "Inverted Row (table)",
+            "youtubeUrl": "https://youtu.be/KOaCM1HMwU0?si=Ba7U4qqSOw-LR5o1"
+          },
+          {
+            "name": "Towel Row",
+            "youtubeUrl": "https://youtu.be/SkFBcrHVGn4?si=1G9_PkkvuTX7x3u8"
+          },
+          {
+            "name": "Backpack Row",
+            "youtubeUrl": "https://youtube.com/shorts/82jkjKXN1FY?si=RRIAtmktGEJoSVVK"
+          },
+          {
+            "name": "Superman Hold",
+            "youtubeUrl": "https://youtu.be/J9zXkxUAfUA?si=PHY-RWTgyzJ-dYcG"
+          },
+          {
+            "name": "Isometric Towel Curl",
+            "youtubeUrl": "https://youtube.com/shorts/XvRE0jzNLkc?si=0MExf3h9vATgnQs0"
+          },
+          {
+            "name": "Reverse Snow Angels",
+            "youtubeUrl": "https://youtu.be/R4iO4gXC_TY?si=JZhYdh9NBvCypS4_"
+          }
+        ]
+      },
+      {
+        "title": "Day 3 – Legs",
+        "exercises": [
+          {
+            "name": "Bodyweight Squats",
+            "youtubeUrl": "https://youtube.com/shorts/n_xLyzPEX7A?si=hOON69umwaeiCHcz"
+          },
+          {
+            "name": "Jump Squats",
+            "youtubeUrl": "https://youtube.com/shorts/I_cwsX_95nw?si=1LOIBpvm-mlMTpIz"
+          },
+          {
+            "name": "Lunges",
+            "youtubeUrl": "https://youtu.be/rKh41FO_eao?si=EiyctE7bzQENi4eq"
+          },
+          {
+            "name": "Bulgarian Split Squats",
+            "youtubeUrl": "https://youtube.com/shorts/or1frhkjBDc?si=b1LxG4QfUheaXGl0"
+          },
+          {
+            "name": "Single-leg Glute Bridge",
+            "youtubeUrl": "https://youtu.be/AVAXhy6pl7o?si=oZIi7zlMWZOaokxw"
+          },
+          {
+            "name": "Calf Raises",
+            "youtubeUrl": "https://youtu.be/Uyg2QR1WAq8?si=obXRN9wZQrRAltgF"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/WDIpL0pjun0/hqdefault.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Full Body – Dumbbell",
+    "difficulty": "Beginner",
+    "equipment": "Dumbbells",
+    "days": [
+      {
+        "title": "Full Body (2–4x/week)",
+        "exercises": [
+          {
+            "name": "DB Squat",
+            "youtubeUrl": "https://youtube.com/shorts/0gNqaP5B818?si=sC6Si3MmBsPwZBsX"
+          },
+          {
+            "name": "DB Romanian Deadlift",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=3T1KEvvzuVZh6z2f"
+          },
+          {
+            "name": "DB Bench / Floor Press",
+            "youtubeUrl": "https://youtu.be/T0Y3OBF1bNI?si=SV4FWxvcGVTTvVzS"
+          },
+          {
+            "name": "DB Row",
+            "youtubeUrl": "https://youtube.com/shorts/z0rtLeSW5Cc?si=Ir2SKRd6EpsA1wcY"
+          },
+          {
+            "name": "DB Shoulder Press",
+            "youtubeUrl": "https://youtube.com/shorts/OLePvpxQEGk?si=4eePp3VhmG2DLi6m"
+          },
+          {
+            "name": "Plank / Russian Twists",
+            "youtubeUrl": "https://youtube.com/shorts/xe2MXatLTUw?si=rwAMzU5FkutTCT8e"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/0gNqaP5B818/hqdefault.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Full Body – Bodyweight",
+    "difficulty": "Beginner",
+    "equipment": "Bodyweight",
+    "days": [
+      {
+        "title": "Full Body",
+        "exercises": [
+          {
+            "name": "Squats",
+            "youtubeUrl": "https://youtu.be/l83R5PblSMA?si=RgiyxUUe8OH6uVkd"
+          },
+          {
+            "name": "Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/wD1M-f69Yy8?si=b1RkSh6-dGKptEnE"
+          },
+          {
+            "name": "Lunges",
+            "youtubeUrl": "https://youtu.be/rKh41FO_eao?si=gf_oRe0esBbp4AGO"
+          },
+          {
+            "name": "Glute Bridge",
+            "youtubeUrl": "https://youtube.com/shorts/2-47T-U82KU?si=VKwIyDf5GwPwUjHO"
+          },
+          {
+            "name": "Pike Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/xvOSkm3CGGk?si=7WShXzOhB6BAyAII"
+          },
+          {
+            "name": "Mountain Climbers",
+            "youtubeUrl": "https://youtube.com/shorts/0LvR42Z599c?si=7NEJKx0WU-1dc717"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/l83R5PblSMA/hqdefault.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Upper / Lower Split – Dumbbell",
+    "difficulty": "Intermediate",
+    "equipment": "Dumbbells",
+    "days": [
+      {
+        "title": "Upper Day",
+        "exercises": [
+          {
+            "name": "DB Bench Press",
+            "youtubeUrl": "https://youtu.be/O7ECGhZj_Hc?si=_bC2aNa_Hmm0SGzp"
+          },
+          {
+            "name": "DB Row",
+            "youtubeUrl": "https://youtube.com/shorts/z0rtLeSW5Cc?si=-pzC_yD0ExaGhmQw"
+          },
+          {
+            "name": "DB Shoulder Press",
+            "youtubeUrl": "https://youtube.com/shorts/OLePvpxQEGk?si=Y_jgthVNJKxv2hB8"
+          },
+          {
+            "name": "Lateral Raise",
+            "youtubeUrl": "https://youtube.com/shorts/mRfJZsn5DYY?si=PHLnO0mrrJSFanjN"
+          },
+          {
+            "name": "DB Curl",
+            "youtubeUrl": "https://youtu.be/cBSD6mQIPQk?si=HBcbknzkkVKaMsSt"
+          },
+          {
+            "name": "Tricep Extension",
+            "youtubeUrl": "https://youtu.be/a9oPnZReIRE?si=qqYMjaeI-eCNBCWV"
+          }
+        ]
+      },
+      {
+        "title": "Lower Day",
+        "exercises": [
+          {
+            "name": "Goblet Squat",
+            "youtubeUrl": "https://youtube.com/shorts/lRYBbchqxtI?si=UyfkRJ3TZXaEeOxA"
+          },
+          {
+            "name": "DB Romanian Deadlift",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=t5yo3k7M4kGtU_k7"
+          },
+          {
+            "name": "DB Lunges",
+            "youtubeUrl": "https://youtube.com/shorts/38xlLGfguz4?si=ElJ-CjgR5WANBHfQ"
+          },
+          {
+            "name": "Step-ups",
+            "youtubeUrl": "https://youtu.be/9ZknEYboBOQ?si=7u9W0HBydhP5B8Sp"
+          },
+          {
+            "name": "Calf Raises",
+            "youtubeUrl": "https://youtube.com/shorts/a-x_NR-ibos?si=zTrZhymW68bdqfPt"
+          },
+          {
+            "name": "Leg Raises",
+            "youtubeUrl": "https://youtu.be/l4kQd9eWclE?si=aVlMo7C5iwflRNju"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/O7ECGhZj_Hc/hqdefault.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Bro Split – Dumbbell",
+    "difficulty": "Intermediate",
+    "equipment": "Dumbbells",
+    "days": [
+      {
+        "title": "Chest Day",
+        "exercises": [
+          {
+            "name": "DB Bench Press",
+            "youtubeUrl": "https://youtube.com/shorts/1V3vpcaxRYQ?si=rC5RF8HPHvJfvkNK"
+          },
+          {
+            "name": "DB Incline Press",
+            "youtubeUrl": "https://youtube.com/shorts/ou6s32mJgjU?si=3B_bAUOJVQ15ucqI"
+          },
+          {
+            "name": "DB Fly",
+            "youtubeUrl": "https://youtube.com/shorts/XRajDdka4BU?si=A0A-yHu6JA4jby8s"
+          },
+          {
+            "name": "Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/_YrJc-kTYA0?si=rvXHa5USRQ20TN6J"
+          },
+          {
+            "name": "DB Pullover",
+            "youtubeUrl": "https://youtu.be/ieFKuQAGYIA?si=Z9j063iCNkMVuicn"
+          },
+          {
+            "name": "Close-grip Press",
+            "youtubeUrl": "https://youtube.com/shorts/4yKLxOsrGfg?si=Vuir2Y-x6ZPAqQhS"
+          }
+        ]
+      },
+      {
+        "title": "Back Day",
+        "exercises": [
+          {
+            "name": "DB Row",
+            "youtubeUrl": "https://youtube.com/shorts/z0rtLeSW5Cc?si=fQOqVXRTOyaEdaAE"
+          },
+          {
+            "name": "Single-arm Row",
+            "youtubeUrl": "https://youtube.com/shorts/qN54-QNO1eQ?si=xN2pKo4JzriNB-Cx"
+          },
+          {
+            "name": "Reverse Fly",
+            "youtubeUrl": "https://youtu.be/3gJXpfwg_go?si=Pq3ycmN08Hj2tMZ7"
+          },
+          {
+            "name": "Shrugs",
+            "youtubeUrl": "https://youtube.com/shorts/NJ8U95vMtZg?si=R_dI29K8HSQGqDia"
+          },
+          {
+            "name": "DB Curl",
+            "youtubeUrl": "https://youtube.com/shorts/RqHptAnbrb4?si=bNkXwnG4dh7c5YbJ"
+          },
+          {
+            "name": "Hammer Curl",
+            "youtubeUrl": "https://youtube.com/shorts/VqoFbCmRyyk?si=yFzgwBByrH9A5Yhw"
+          }
+        ]
+      },
+      {
+        "title": "Shoulder Day",
+        "exercises": [
+          {
+            "name": "DB Shoulder Press",
+            "youtubeUrl": "https://youtube.com/shorts/OLePvpxQEGk?si=quXJtDlAZPHZxO9Q"
+          },
+          {
+            "name": "Lateral Raise",
+            "youtubeUrl": "https://youtube.com/shorts/mRfJZsn5DYY?si=GPBSOaXo9GCCGI3y"
+          },
+          {
+            "name": "Front Raise",
+            "youtubeUrl": "https://youtube.com/shorts/dybxZJaWxCY?si=MOrmbknJo-M_29uV"
+          },
+          {
+            "name": "Rear Delt Raise",
+            "youtubeUrl": "https://youtube.com/shorts/ttFX-IeSjAY?si=HCHmNA169IgUDIaF"
+          },
+          {
+            "name": "Upright Row",
+            "youtubeUrl": "https://youtube.com/shorts/YMRrYjPqo6M?si=p8hmZBiT4roQg-PS"
+          },
+          {
+            "name": "Shrugs",
+            "youtubeUrl": "https://youtube.com/shorts/NJ8U95vMtZg?si=LZIfW1dlEc760pXo"
+          }
+        ]
+      },
+      {
+        "title": "Arm Day",
+        "exercises": [
+          {
+            "name": "DB Curl",
+            "youtubeUrl": "https://youtu.be/cBSD6mQIPQk?si=V7WdhcywPq3BLIIA"
+          },
+          {
+            "name": "Hammer Curl",
+            "youtubeUrl": "https://youtube.com/shorts/lmIo_gVE8T4?si=iKtAnOd6MGTHyKl7"
+          },
+          {
+            "name": "Concentration Curl",
+            "youtubeUrl": "https://youtube.com/shorts/I_bKCYL2nL8?si=je_ValiKcnrqhsgn"
+          },
+          {
+            "name": "Skull Crusher",
+            "youtubeUrl": "https://youtube.com/shorts/EXUdJH-lhKc?si=NUsJiYYOY2m3lUwq"
+          },
+          {
+            "name": "Overhead Extension",
+            "youtubeUrl": "https://youtube.com/shorts/WDLssSPS-mw?si=0csMXRNJpmzezlHi"
+          },
+          {
+            "name": "Close-grip Push-ups",
+            "youtubeUrl": "https://youtu.be/2cdIRe5tcqI?si=YuTQkTwj32zd__by"
+          },
+          {
+            "name": "Goblet Squat",
+            "youtubeUrl": "https://youtube.com/shorts/cA8Eg03PFOM?si=OCi4hjHBVfd65McG"
+          },
+          {
+            "name": "RDL",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=tqkd3lTScfQMgHS6"
+          },
+          {
+            "name": "Lunges",
+            "youtubeUrl": "https://youtube.com/shorts/38xlLGfguz4?si=X9H8pFajizCQz9Pa"
+          },
+          {
+            "name": "Bulgarian Split Squat",
+            "youtubeUrl": "https://youtube.com/shorts/Q20qIs79tJc?si=t9BvhRJ4Vlg5FFMY"
+          },
+          {
+            "name": "Calf Raise",
+            "youtubeUrl": "https://youtu.be/SRUtMJ0tE2A?si=vAX2Wwig6ihUTJC0"
+          },
+          {
+            "name": "Glute Bridge",
+            "youtubeUrl": "https://youtube.com/shorts/euDIvpBWmDg?si=4dHgJoVG82qlCF3E"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/1V3vpcaxRYQ/hqdefault.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Arnold Split – Dumbbell",
+    "difficulty": "Advanced",
+    "equipment": "Dumbbells",
+    "days": [
+      {
+        "title": "Chest + Back",
+        "exercises": [
+          {
+            "name": "DB Bench Press",
+            "youtubeUrl": "https://youtube.com/shorts/1V3vpcaxRYQ?si=rC5RF8HPHvJfvkNK"
+          },
+          {
+            "name": "DB Fly",
+            "youtubeUrl": "https://youtube.com/shorts/XRajDdka4BU?si=A0A-yHu6JA4jby8s"
+          },
+          {
+            "name": "DB Row",
+            "youtubeUrl": "https://youtube.com/shorts/z0rtLeSW5Cc?si=fQOqVXRTOyaEdaAE"
+          },
+          {
+            "name": "Single-arm Row",
+            "youtubeUrl": "https://youtube.com/shorts/qN54-QNO1eQ?si=xN2pKo4JzriNB-Cx"
+          },
+          {
+            "name": "DB Pullover",
+            "youtubeUrl": "https://youtu.be/ieFKuQAGYIA?si=Z9j063iCNkMVuicn"
+          },
+          {
+            "name": "Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/_YrJc-kTYA0?si=rvXHa5USRQ20TN6J"
+          }
+        ]
+      },
+      {
+        "title": "Shoulders + Arms",
+        "exercises": [
+          {
+            "name": "Shoulder Press",
+            "youtubeUrl": "https://youtube.com/shorts/OLePvpxQEGk?si=quXJtDlAZPHZxO9Q"
+          },
+          {
+            "name": "Lateral Raise",
+            "youtubeUrl": "https://youtube.com/shorts/mRfJZsn5DYY?si=GPBSOaXo9GCCGI3y"
+          },
+          {
+            "name": "Rear Delt Raise",
+            "youtubeUrl": "https://youtu.be/3gJXpfwg_go?si=iMTh8nqq3_je1aie"
+          },
+          {
+            "name": "DB Curl",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+bicep+curl+exercise+tutorial+exercise+tutorial"
+          },
+          {
+            "name": "Hammer Curl",
+            "youtubeUrl": "https://youtube.com/shorts/VqoFbCmRyyk?si=yFzgwBByrH9A5Yhw"
+          },
+          {
+            "name": "Tricep Extension",
+            "youtubeUrl": "https://youtu.be/a9oPnZReIRE?si=OnfleYN41Qk9ECNV"
+          }
+        ]
+      },
+      {
+        "title": "Legs",
+        "exercises": [
+          {
+            "name": "Goblet Squat",
+            "youtubeUrl": "https://youtube.com/shorts/cA8Eg03PFOM?si=OCi4hjHBVfd65McG"
+          },
+          {
+            "name": "RDL",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=tqkd3lTScfQMgHS6"
+          },
+          {
+            "name": "Lunges",
+            "youtubeUrl": "https://youtube.com/shorts/38xlLGfguz4?si=S3YTcSHfe207OCTK"
+          },
+          {
+            "name": "Step-ups",
+            "youtubeUrl": "https://youtu.be/9ZknEYboBOQ?si=bceaUGR6qgUKzdZB"
+          },
+          {
+            "name": "Calf Raise",
+            "youtubeUrl": "https://youtu.be/SRUtMJ0tE2A?si=vAX2Wwig6ihUTJC0"
+          },
+          {
+            "name": "Wall Sit",
+            "youtubeUrl": "https://youtu.be/cWTZ8Am1Ee0?si=LlHCls7M-_hklh_z"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/1V3vpcaxRYQ/hqdefault.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Upper / Lower / Arms Split",
+    "difficulty": "Intermediate",
+    "equipment": "Dumbbells",
+    "days": [
+      {
+        "title": "Upper",
+        "exercises": [
+          {
+            "name": "DB Bench Press",
+            "youtubeUrl": "https://youtube.com/shorts/1V3vpcaxRYQ?si=rC5RF8HPHvJfvkNK"
+          },
+          {
+            "name": "DB Row",
+            "youtubeUrl": "https://youtube.com/shorts/z0rtLeSW5Cc?si=fQOqVXRTOyaEdaAE"
+          },
+          {
+            "name": "DB Shoulder Press",
+            "youtubeUrl": "https://youtube.com/shorts/OLePvpxQEGk?si=quXJtDlAZPHZxO9Q"
+          },
+          {
+            "name": "Lateral Raise",
+            "youtubeUrl": "https://youtube.com/shorts/mRfJZsn5DYY?si=GPBSOaXo9GCCGI3y"
+          },
+          {
+            "name": "DB Curl",
+            "youtubeUrl": "https://youtu.be/ieFKuQAGYIA?si=Z9j063iCNkMVuicn"
+          },
+          {
+            "name": "Tricep Extension",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+overhead+tricep+extension+exercise+tutorial"
+          }
+        ]
+      },
+      {
+        "title": "Lower",
+        "exercises": [
+          {
+            "name": "Goblet Squat",
+            "youtubeUrl": "https://youtube.com/shorts/cA8Eg03PFOM?si=OCi4hjHBVfd65McG"
+          },
+          {
+            "name": "DB Romanian Deadlift",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=HE5yuj6jwO9L8PNO"
+          },
+          {
+            "name": "DB Lunges",
+            "youtubeUrl": "https://youtube.com/shorts/38xlLGfguz4?si=X9H8pFajizCQz9Pa"
+          },
+          {
+            "name": "Step-ups",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+step-up+exercise+tutorial+exercise+tutorial"
+          },
+          {
+            "name": "Calf Raises",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+calf+raises+standing+tutorial+exercise+tutorial"
+          },
+          {
+            "name": "Leg Raises",
+            "youtubeUrl": "https://youtube.com/shorts/5uB0KaoCF9w?si=hXkeGsocJ8sHjIpA"
+          }
+        ]
+      },
+      {
+        "title": "Arms + Core",
+        "exercises": [
+          {
+            "name": "DB Curl",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=dumbbell+bicep+curl+exercise+tutorial+exercise+tutorial"
+          },
+          {
+            "name": "Hammer Curl",
+            "youtubeUrl": "https://www.youtube.com/results?search_query=hammer+curl+dumbbell+bicep+tutorial+exercise+tutorial"
+          },
+          {
+            "name": "Skull Crusher",
+            "youtubeUrl": "https://youtube.com/shorts/EXUdJH-lhKc?si=bhElJX5SXxgtDLf1"
+          },
+          {
+            "name": "Overhead Extension",
+            "youtubeUrl": "https://youtu.be/a9oPnZReIRE?si=jBz5iUSvhFoOtA5H"
+          },
+          {
+            "name": "Plank",
+            "youtubeUrl": "https://youtu.be/pvIjsG5Svck?si=rTP4Cwscyq42QS4a"
+          },
+          {
+            "name": "Russian Twists",
+            "youtubeUrl": "https://youtu.be/DJQGX2J4IVw?si=nMugyYelp-RpB5GD"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/1V3vpcaxRYQ/hqdefault.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Strength-Focused Full Body",
+    "difficulty": "Intermediate",
+    "equipment": "Dumbbells (Heavy)",
+    "days": [
+      {
+        "title": "Full Body (Heavy)",
+        "exercises": [
+          {
+            "name": "Heavy Goblet Squat",
+            "youtubeUrl": "https://youtube.com/shorts/lRYBbchqxtI?si=V1v0XIxM5L6CdOAQ"
+          },
+          {
+            "name": "Heavy DB Bench Press",
+            "youtubeUrl": "https://youtube.com/shorts/WbCEvFA0NJs?si=r_EJaSCDwdZYMEyM"
+          },
+          {
+            "name": "Heavy DB Row",
+            "youtubeUrl": "https://youtube.com/shorts/z0rtLeSW5Cc?si=pZsPTWeMDM4Nequ7"
+          },
+          {
+            "name": "DB RDL",
+            "youtubeUrl": "https://youtube.com/shorts/vnEANU7BqqY?si=n8D_OvHlfCWQrt_E"
+          },
+          {
+            "name": "Farmer Carry",
+            "youtubeUrl": "https://youtu.be/8OtwXwrJizk?si=YZmOgvf-JZILkBax"
+          },
+          {
+            "name": "Plank",
+            "youtubeUrl": "https://youtube.com/shorts/xe2MXatLTUw?si=wlTzGXULF85BtYMU"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/lRYBbchqxtI/hqdefault.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Conditioning Hybrid – Fat Loss",
+    "difficulty": "Beginner–Intermediate",
+    "equipment": "Dumbbells + BW",
+    "days": [
+      {
+        "title": "Fat Loss Circuit",
+        "exercises": [
+          {
+            "name": "DB Thrusters",
+            "youtubeUrl": "https://youtube.com/shorts/UipBcISeiGU?si=3RXBTRT0YRIRsShX"
+          },
+          {
+            "name": "Push-ups",
+            "youtubeUrl": "https://youtube.com/shorts/UIcct-7b6oE?si=_C41lG8Ma_R4p5o1"
+          },
+          {
+            "name": "DB Swings",
+            "youtubeUrl": "https://youtu.be/75vxU7AauRA?si=fIglxLn3ZXxVCQP8"
+          },
+          {
+            "name": "Jump Squats",
+            "youtubeUrl": "https://youtube.com/shorts/I_cwsX_95nw?si=gYUtWCG0_C6v77Tq"
+          },
+          {
+            "name": "Mountain Climbers",
+            "youtubeUrl": "https://youtube.com/shorts/0LvR42Z599c?si=Nk4OLEnLQpvtCYja"
+          },
+          {
+            "name": "Burpees",
+            "youtubeUrl": "https://youtube.com/shorts/RVhgEGhMQEA?si=ydqFjokPFo7OP0E-"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "thumbnail": "https://img.youtube.com/vi/UipBcISeiGU/hqdefault.jpg"
+  }
+]

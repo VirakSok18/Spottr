@@ -1,0 +1,1182 @@
+{
+  "WorkoutDayProgress": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "firebaseUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "planTitle",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "dayNumber",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "completedAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "Workouts": [
+    {
+      "COLUMN_NAME": "Exercise_ID",
+      "DATA_TYPE": "smallint",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "Exercise",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "Short_YouTube_Demonstration",
+      "DATA_TYPE": "varchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "In_Depth_YouTube_Explanation",
+      "DATA_TYPE": "varchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "Difficulty_Level",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Target_Muscle_Group",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Prime_Mover_Muscle",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Secondary_Muscle",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Tertiary_Muscle",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Primary_Equipment",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Primary_Items",
+      "DATA_TYPE": "tinyint",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "Secondary_Equipment",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Secondary_Items",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "Posture",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Single_or_Double_Arm",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Continuous_or_Alternating_Arms",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Grip",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Load_Position_Ending",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Combination_Exercises",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Movement_Pattern_1",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Movement_Pattern_2",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Movement_Pattern_3",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Plane_Of_Motion_1",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Plane_Of_Motion_2",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Plane_Of_Motion_3",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Body_Region",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Force_Type",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Mechanics",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Laterality",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Exercise_Classification",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    }
+  ],
+  "Copy of Workout_Program_LibraryCSV": [
+    {
+      "COLUMN_NAME": "Column_1",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "Program",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "Difficulty",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 150
+    },
+    {
+      "COLUMN_NAME": "Equipment",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    }
+  ],
+  "Posts": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "content",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "mediaUrl",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "mediaType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "Likes": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "postId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "Comments": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "postId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "content",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "parentCommentId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "SavedPosts": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "postId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "PasswordResetOTPs": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "email",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "code",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 10
+    },
+    {
+      "COLUMN_NAME": "expiresAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "isUsed",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "DailyUsageLimits": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "firebaseUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "limitType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "messageCount",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "lastResetDate",
+      "DATA_TYPE": "date",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "PostMedia": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "postId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "mediaUrl",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "mediaType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "SignupOTPs": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "email",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "code",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 10
+    },
+    {
+      "COLUMN_NAME": "expiresAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "isUsed",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "Users": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "firebaseUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "fullName",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "email",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "phone",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 20
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "gender",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 20
+    },
+    {
+      "COLUMN_NAME": "age",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "weight",
+      "DATA_TYPE": "float",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "height",
+      "DATA_TYPE": "float",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "updatedAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "workout_location",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "equipment_list",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "focus_areas",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "workout_frequency",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "training_level",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "is_setup_completed",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "weight_unit",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 10
+    },
+    {
+      "COLUMN_NAME": "fitness_goal",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "profilePictureUrl",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "isOnline",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "lastActive",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "fcmToken",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "bio",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 500
+    },
+    {
+      "COLUMN_NAME": "looking_for",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "preferences",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "availability",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "experience",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "latitude",
+      "DATA_TYPE": "float",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "longitude",
+      "DATA_TYPE": "float",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "location_label",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "location_privacy",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "is_location_paused",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "saved_addresses",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "availability_time_spans",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "coverPhotoUrl",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "isPremium",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "planType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "stripeCustomerId",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "stripeSubscriptionId",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "premiumUntil",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "EmailRateLimits": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "email",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "limitType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "count",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "lastAttempt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "WorkoutLogs": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "workoutName",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "exercises",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "duration",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "caloriesBurned",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "UserPlans": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "planData",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "isAI",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "AICoachMessages": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "role",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 20
+    },
+    {
+      "COLUMN_NAME": "content",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "PostCollections": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "userUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "name",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "ChatRequests": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "senderUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "receiverUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "status",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 20
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "updatedAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "PostCollectionItems": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "collectionId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "postId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "Notifications": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "recipientUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "senderUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "type",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "title",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "message",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "referenceId",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "isRead",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "Messages": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "senderUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "receiverUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "content",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "isRead",
+      "DATA_TYPE": "bit",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "mediaUrl",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "mediaType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 20
+    },
+    {
+      "COLUMN_NAME": "parentId",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "parentContent",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "parentMediaType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": 20
+    }
+  ],
+  "Blocks": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "blockerUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "blockedUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 128
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "PersonalizedWorkoutPlans": [
+    {
+      "COLUMN_NAME": "id",
+      "DATA_TYPE": "int",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "firebaseUid",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "planType",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "planTitle",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "planData",
+      "DATA_TYPE": "nvarchar",
+      "IS_NULLABLE": "NO",
+      "CHARACTER_MAXIMUM_LENGTH": -1
+    },
+    {
+      "COLUMN_NAME": "createdAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "updatedAt",
+      "DATA_TYPE": "datetime",
+      "IS_NULLABLE": "YES",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ]
+}

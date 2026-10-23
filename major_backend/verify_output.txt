@@ -1,0 +1,11 @@
+﻿[dotenv@17.2.3] injecting env (6) from .env -- tip: ≡ƒôí add observability to secrets: https://dotenvx.com/ops
+Connected to MSSQL
+--- Verification: High-Entropy Plan Start Variety ---
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ΓÜÖ∩╕Å  suppress all logs with { quiet: true }
+
+Found 3 Plans.
+Plan 1 First Exercise: Barbell Staggered Stance Overhead Press (Tier: t2)
+Plan 2 First Exercise: Barbell Z Press (Tier: t2)
+Plan 3 First Exercise: Bodyweight Row Feet Elevated (Tier: t2)
+
+Γ£à Success: All suggested plans start with DIFFERENT exercises.

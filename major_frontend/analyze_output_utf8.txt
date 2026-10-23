@@ -1,0 +1,100 @@
+﻿Resolving dependencies...
+Downloading packages...
+  _flutterfire_internals 1.3.59 (1.3.66 available)
+  characters 1.4.0 (1.4.1 available)
+  ffi 2.1.4 (2.1.5 available)
+  firebase_auth 5.7.0 (6.1.4 available)
+  firebase_auth_platform_interface 7.7.3 (8.1.6 available)
+  firebase_auth_web 5.15.3 (6.1.2 available)
+  firebase_core 3.15.2 (4.4.0 available)
+  firebase_core_web 2.24.1 (3.4.0 available)
+  flutter_facebook_auth 7.1.2 (7.1.5 available)
+  flutter_lints 5.0.0 (6.0.0 available)
+  flutter_secure_storage 9.2.4 (10.0.0 available)
+  flutter_secure_storage_linux 1.2.3 (3.0.0 available)
+  flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+  flutter_secure_storage_platform_interface 1.1.2 (2.0.1 available)
+  flutter_secure_storage_web 1.2.1 (2.1.0 available)
+  flutter_secure_storage_windows 3.1.2 (4.1.0 available)
+  google_sign_in 6.3.0 (7.2.0 available)
+  google_sign_in_android 6.2.1 (7.2.7 available)
+  google_sign_in_ios 5.9.0 (6.2.5 available)
+  google_sign_in_platform_interface 2.5.0 (3.1.0 available)
+  google_sign_in_web 0.12.4+4 (1.1.0 available)
+  js 0.6.7 (0.7.2 available)
+  lints 5.1.1 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  meta 1.16.0 (1.18.0 available)
+  path_provider_foundation 2.5.1 (2.6.0 available)
+  test_api 0.7.6 (0.7.9 available)
+Got dependencies!
+28 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing major_frontend...                                     
+
+   info - Parameter 'key' could be a super parameter - lib\blank_page.dart:7:9 - use_super_parameters
+   info - Don't invoke 'print' in production code - lib\main.dart:12:3 - avoid_print
+   info - Don't invoke 'print' in production code - lib\main.dart:14:3 - avoid_print
+   info - Don't invoke 'print' in production code - lib\main.dart:17:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\main.dart:19:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\main.dart:22:3 - avoid_print
+   info - Parameter 'key' could be a super parameter - lib\main.dart:26:9 - use_super_parameters
+  error - The named parameter 'onShowSignUp' is required, but there's no corresponding argument - lib\main.dart:39:33 - missing_required_argument
+  error - The named parameter 'onShowSignIn' is required, but there's no corresponding argument - lib\main.dart:40:33 - missing_required_argument
+   info - Parameter 'key' could be a super parameter - lib\main.dart:48:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\main.dart:50:10 - library_private_types_in_public_api
+   info - Don't invoke 'print' in production code - lib\main.dart:75:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\main.dart:102:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\main.dart:121:15 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:111:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:118:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:122:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:130:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:136:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:146:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:158:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\screens\auth\auth_screens.dart:165:7 - avoid_print
+   info - Parameter 'key' could be a super parameter - lib\screens\auth\auth_screens.dart:208:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\auth\auth_screens.dart:461:9 - use_super_parameters
+   info - Don't use 'BuildContext's across async gaps - lib\screens\auth\auth_screens.dart:525:30 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\screens\auth\auth_screens.dart:530:21 - use_build_context_synchronously
+   info - 'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre - lib\screens\auth\auth_screens.dart:674:38 - deprecated_member_use
+   info - 'MaterialState' is deprecated and shouldn't be used. Use WidgetState instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre - lib\screens\auth\auth_screens.dart:675:49 - deprecated_member_use
+warning - Unused import: '../home/home_screen.dart' - lib\screens\body_data\body_data.dart:5:8 - unused_import
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:13:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:114:70 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:169:76 - deprecated_member_use
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:203:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:391:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:497:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:505:75 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:511:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:581:84 - deprecated_member_use
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:677:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:874:88 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\body_data\body_data.dart:909:29 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\body_data\body_data.dart:915:48 - use_build_context_synchronously
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:951:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:1221:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:1422:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\body_data\body_data.dart:1544:61 - deprecated_member_use
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:1627:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\body_data\body_data.dart:1807:9 - use_super_parameters
+warning - Unused import: '../auth/auth_screens.dart' - lib\screens\home\home_screen.dart:2:8 - unused_import
+   info - Parameter 'key' could be a super parameter - lib\screens\home\home_screen.dart:6:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\landing\onboarding_screen.dart:5:9 - use_super_parameters
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\landing\onboarding_screen.dart:107:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\landing\onboarding_screen.dart:198:36 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\landing\onboarding_screen.dart:199:36 - deprecated_member_use
+   info - Unnecessary braces in a string interpolation - lib\screens\landing\onboarding_screen.dart:256:16 - unnecessary_brace_in_string_interps
+
+flutter : 55 issues found. (ran in 2.2s)
+At line:1 char:1
++ flutter analyze > analyze_output.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (55 issu 
+   es found. (ran in 2.2s):String) [], RemoteExcept  
+  ion
+    + FullyQualifiedErrorId : NativeCommandError
+ 

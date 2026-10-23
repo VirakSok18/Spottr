@@ -1,0 +1,40 @@
+# Root gitignore
+.vscode/
+*.bacpac
+backend_zip_check/
+exercises-gifs/
+full_ex_0001.json
+video_ex_0001.json
+temp_gifs/
+
+# Node.js
+**/node_modules/
+**/dist/
+
+# Env
+**/.env
+**/.env.local
+**/.env.production
+**/firebase-service-account.json
+
+# Flutter
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.pub/
+**/generated/
+**/ios/Flutter/
+**/ios/Pods/
+**/ios/.generated/
+**.iml
+**.ipr
+**.iws
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+major_backend/fix-json.js

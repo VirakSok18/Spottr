@@ -1,0 +1,30 @@
+[
+  {
+    "id": 13,
+    "email": "virak820604@gmail.com",
+    "limitType": "signup-otp",
+    "count": 3,
+    "lastAttempt": "2026-03-22T11:19:55.633Z"
+  },
+  {
+    "id": 14,
+    "email": "virak820604@gmail.com",
+    "limitType": "verify-signup-otp",
+    "count": 5,
+    "lastAttempt": "2026-03-22T11:17:36.843Z"
+  },
+  {
+    "id": 15,
+    "email": "raklol754@gmail.com",
+    "limitType": "signup-otp",
+    "count": 1,
+    "lastAttempt": "2026-03-22T11:23:01.770Z"
+  },
+  {
+    "id": 16,
+    "email": "raklol754@gmail.com",
+    "limitType": "verify-signup-otp",
+    "count": 2,
+    "lastAttempt": "2026-03-22T11:23:59.690Z"
+  }
+]

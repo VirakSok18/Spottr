@@ -1,0 +1,19 @@
+﻿[dotenv@17.2.3] injecting env (6) from .env -- tip: ΓÜÖ∩╕Å  override existing env vars with { override: true }
+Connected to MSSQL
+--- Deep Audit: Intra-Day Video Uniqueness ---
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ΓÜÖ∩╕Å  specify custom .env file path with { path: '/custom/path/.env' }
+
+Plan 1: Arm Mastery
+ Day 1 (Upper): 6 exercises, 6 unique videos
+ Day 3 (Lower): 6 exercises, 6 unique videos
+ Day 5 (Upper): 6 exercises, 6 unique videos
+
+Plan 2: Shoulder Strength
+ Day 1 (Upper): 6 exercises, 6 unique videos
+ Day 3 (Lower): 6 exercises, 6 unique videos
+ Day 5 (Upper): 6 exercises, 6 unique videos
+
+Plan 3: Back Power
+ Day 1 (Upper): 6 exercises, 6 unique videos
+ Day 3 (Lower): 6 exercises, 6 unique videos
+ Day 5 (Upper): 6 exercises, 6 unique videos

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Spottr</string>
+
+    <string name="facebook_app_id">1796632500851825</string>
+    <string name="facebook_client_token">394d459c397ac26d38cd5cb698587a50</string>
+    <string name="fb_login_protocol_scheme">fb1796632500851825</string>
+</resources>
