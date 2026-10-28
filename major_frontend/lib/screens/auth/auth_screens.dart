@@ -332,6 +332,16 @@ class AuthService {
     String? phone,
   }) async {
     try {
+      // Check existing user to preserve setup status
+      final existing = await app_config.Config.supabase
+          .from('users')
+          .select('is_setup_completed')
+          .eq('firebaseUid', user.uid)
+          .maybeSingle();
+
+      final bool isAlreadySetup = existing != null &&
+          (existing['is_setup_completed'] == true || existing['is_setup_completed'] == 1);
+
       await app_config.Config.supabase.from('users').upsert({
         'firebaseUid': user.uid,
         'fullName': fullName ?? user.displayName ?? 'Spottr Athlete',
@@ -339,8 +349,8 @@ class AuthService {
         'phone': phone,
         'isPremium': true,
         'planType': 'free_pro',
-        'is_setup_completed': true,
-        'createdAt': DateTime.now().toIso8601String(),
+        'is_setup_completed': isAlreadySetup,
+        if (existing == null) 'createdAt': DateTime.now().toIso8601String(),
         'updatedAt': DateTime.now().toIso8601String(),
       }, onConflict: 'firebaseUid');
 
@@ -771,6 +781,26 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                         const SizedBox(height: 24),
+
+                        const Text(
+                          'Sign in with',
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                        ),
+                        const SizedBox(height: 16),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _SocialButton(
+                              assetPath: 'assets/images/google.png',
+                              onPressed: _isLoading
+                                  ? () {}
+                                  : () => _handleSocialSignIn(
+                                      _authService.signInWithGoogle,
+                                    ),
+                            ),
+                          ],
+                        ),
 
                         const Spacer(),
 
@@ -1363,6 +1393,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 24),
+
+                        const Text(
+                          'Sign up with',
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                        ),
+                        const SizedBox(height: 16),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _SocialButton(
+                              assetPath: 'assets/images/google.png',
+                              onPressed: _isLoading
+                                  ? () {}
+                                  : () => _handleSocialSignIn(
+                                      _authService.signInWithGoogle,
+                                    ),
+                            ),
+                          ],
+                        ),
 
                         const Spacer(),
 
