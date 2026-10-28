@@ -1,4 +1,5 @@
 # Root gitignore
+*.apk
 .vscode/
 *.bacpac
 backend_zip_check/

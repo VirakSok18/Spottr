@@ -1,86 +1,111 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'config.dart' as app_config;
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dio/dio.dart' as dio;
-import '../screens/auth/auth_screens.dart';
+import 'config.dart' as app_config;
 
 class PostService {
-  final String baseUrl = '${app_config.Config.baseUrl}/api/posts';
-  final dio.Dio _dio = dio.Dio();
-
   Future<List<Map<String, dynamic>>> getFeed() async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return [];
-      
-      final token = await user.getIdToken();
-      final response = await http.get(
-        Uri.parse(baseUrl),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      final currentUid = FirebaseAuth.instance.currentUser?.uid;
+      final res = await app_config.Config.supabase
+          .from('feed_posts_view')
+          .select()
+          .order('createdAt', ascending: false);
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
+      List<dynamic> likedIds = [];
+      List<dynamic> savedIds = [];
+      if (currentUid != null) {
+        final likes = await app_config.Config.supabase
+            .from('likes')
+            .select('postId')
+            .eq('userUid', currentUid);
+        likedIds = likes.map((l) => l['postId']).toList();
+
+        final saved = await app_config.Config.supabase
+            .from('saved_posts')
+            .select('postId')
+            .eq('userUid', currentUid);
+        savedIds = saved.map((s) => s['postId']).toList();
       }
-      return [];
+
+      return res.map<Map<String, dynamic>>((post) {
+        final m = Map<String, dynamic>.from(post);
+        m['isLiked'] = likedIds.contains(m['id']);
+        m['isSaved'] = savedIds.contains(m['id']);
+        return m;
+      }).toList();
     } catch (e) {
-      print('Error fetching feed: $e');
+      print('PostService: Error fetching feed: $e');
       return [];
     }
   }
 
   Future<List<Map<String, dynamic>>> getUserPosts(String uid) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return [];
-      
-      final token = await user.getIdToken();
-      final response = await http.get(
-        Uri.parse('$baseUrl/user/$uid'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      final currentUid = FirebaseAuth.instance.currentUser?.uid;
+      final res = await app_config.Config.supabase
+          .from('feed_posts_view')
+          .select()
+          .eq('userUid', uid)
+          .order('createdAt', ascending: false);
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
+      List<dynamic> likedIds = [];
+      List<dynamic> savedIds = [];
+      if (currentUid != null) {
+        final likes = await app_config.Config.supabase
+            .from('likes')
+            .select('postId')
+            .eq('userUid', currentUid);
+        likedIds = likes.map((l) => l['postId']).toList();
+
+        final saved = await app_config.Config.supabase
+            .from('saved_posts')
+            .select('postId')
+            .eq('userUid', currentUid);
+        savedIds = saved.map((s) => s['postId']).toList();
       }
-      return [];
+
+      return res.map<Map<String, dynamic>>((post) {
+        final m = Map<String, dynamic>.from(post);
+        m['isLiked'] = likedIds.contains(m['id']);
+        m['isSaved'] = savedIds.contains(m['id']);
+        return m;
+      }).toList();
     } catch (e) {
-      print('Error fetching user posts: $e');
+      print('PostService: Error fetching user posts: $e');
       return [];
     }
   }
 
-  Future<Map<String, dynamic>?> createPost(String content, {List<Map<String, dynamic>>? media}) async {
+  Future<Map<String, dynamic>?> createPost(
+    String content, {
+    List<Map<String, dynamic>>? media,
+  }) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return null;
 
-      final token = await user.getIdToken();
-      final response = await http.post(
-        Uri.parse(baseUrl),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          'content': content,
-          'media': media,
-        }),
-      );
+      final inserted = await app_config.Config.supabase.from('posts').insert({
+        'userUid': user.uid,
+        'content': content,
+        'createdAt': DateTime.now().toIso8601String(),
+      }).select().single();
 
-      if (response.statusCode == 201) {
-        return jsonDecode(response.body);
+      final postId = inserted['id'];
+
+      if (media != null && media.isNotEmpty) {
+        for (var m in media) {
+          await app_config.Config.supabase.from('post_media').insert({
+            'postId': postId,
+            'mediaUrl': m['url'] ?? m['mediaUrl'],
+            'mediaType': m['type'] ?? m['mediaType'] ?? 'image',
+            'createdAt': DateTime.now().toIso8601String(),
+          });
+        }
       }
-      return null;
+
+      return inserted;
     } catch (e) {
-      print('Error creating post: $e');
+      print('PostService: Error creating post: $e');
       return null;
     }
   }
@@ -90,21 +115,30 @@ class PostService {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return false;
 
-      final token = await user.getIdToken();
-      final response = await http.post(
-        Uri.parse('$baseUrl/$postId/like'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      final existing = await app_config.Config.supabase
+          .from('likes')
+          .select('id')
+          .eq('postId', postId)
+          .eq('userUid', user.uid)
+          .maybeSingle();
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return data['liked'];
+      if (existing != null) {
+        await app_config.Config.supabase
+            .from('likes')
+            .delete()
+            .eq('postId', postId)
+            .eq('userUid', user.uid);
+        return false;
+      } else {
+        await app_config.Config.supabase.from('likes').insert({
+          'postId': postId,
+          'userUid': user.uid,
+          'createdAt': DateTime.now().toIso8601String(),
+        });
+        return true;
       }
-      return false;
     } catch (e) {
-      print('Error toggling like: $e');
+      print('PostService: Error toggling like: $e');
       return false;
     }
   }
@@ -114,23 +148,30 @@ class PostService {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return false;
 
-      final token = await user.getIdToken();
-      final response = await http.post(
-        Uri.parse('$baseUrl/$postId/save'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      final existing = await app_config.Config.supabase
+          .from('saved_posts')
+          .select('id')
+          .eq('postId', postId)
+          .eq('userUid', user.uid)
+          .maybeSingle();
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        print('PostService: Toggle save success: ${data['saved']}');
-        return data['saved'];
+      if (existing != null) {
+        await app_config.Config.supabase
+            .from('saved_posts')
+            .delete()
+            .eq('postId', postId)
+            .eq('userUid', user.uid);
+        return false;
+      } else {
+        await app_config.Config.supabase.from('saved_posts').insert({
+          'postId': postId,
+          'userUid': user.uid,
+          'createdAt': DateTime.now().toIso8601String(),
+        });
+        return true;
       }
-      print('PostService: Toggle save failed with status: ${response.statusCode}');
-      return false;
     } catch (e) {
-      print('Error toggling save: $e');
+      print('PostService: Error toggling save: $e');
       return false;
     }
   }
@@ -138,26 +179,27 @@ class PostService {
   Future<List<Map<String, dynamic>>> getSavedPosts() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        print('PostService: No current user for getSavedPosts');
-        return [];
-      }
+      if (user == null) return [];
 
-      final token = await user.getIdToken();
-      print('PostService: Fetching saved posts from $baseUrl/saved');
-      final response = await http.get(
-        Uri.parse('$baseUrl/saved'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ).timeout(const Duration(seconds: 10));
+      final saved = await app_config.Config.supabase
+          .from('saved_posts')
+          .select('postId')
+          .eq('userUid', user.uid);
 
-      print('PostService: getSavedPosts status: ${response.statusCode}');
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
-      }
-      return [];
+      final ids = saved.map((s) => s['postId']).toList();
+      if (ids.isEmpty) return [];
+
+      final res = await app_config.Config.supabase
+          .from('feed_posts_view')
+          .select()
+          .inFilter('id', ids)
+          .order('createdAt', ascending: false);
+
+      return res.map<Map<String, dynamic>>((post) {
+        final m = Map<String, dynamic>.from(post);
+        m['isSaved'] = true;
+        return m;
+      }).toList();
     } catch (e) {
       print('PostService: Error fetching saved posts: $e');
       return [];
@@ -165,158 +207,35 @@ class PostService {
   }
 
   Future<List<Map<String, dynamic>>> getCollectionsWithPostStatus(int postId) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return [];
-      final token = await user.getIdToken();
-      print('PostService: Fetching collections for post $postId');
-      final response = await http.get(
-        Uri.parse('$baseUrl/collections/post/$postId'),
-        headers: {'Authorization': 'Bearer $token'},
-      ).timeout(const Duration(seconds: 10));
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
-      }
-      return [];
-    } catch (e) {
-      print('PostService: Error fetching collections with post status: $e');
-      return [];
-    }
+    return [];
   }
 
-  // Collections
   Future<List<Map<String, dynamic>>> getCollections() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return [];
-      
-      final token = await user.getIdToken();
-      print('PostService: Fetching all collections from $baseUrl/collections/all');
-      final response = await http.get(
-        Uri.parse('$baseUrl/collections/all'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ).timeout(const Duration(seconds: 10));
-
-      print('PostService: getCollections status: ${response.statusCode}');
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
-      }
-      return [];
-    } catch (e) {
-      print('PostService: Error fetching collections: $e');
-      return [];
-    }
+    return [];
   }
 
   Future<Map<String, dynamic>?> createCollection(String name) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return null;
-      final token = await user.getIdToken();
-      final response = await http.post(
-        Uri.parse('$baseUrl/collections'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'name': name}),
-      );
-      if (response.statusCode == 201) return jsonDecode(response.body);
-      return null;
-    } catch (e) {
-      return null;
-    }
+    return null;
   }
 
   Future<bool> addPostToCollection(int collectionId, int postId) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-      final token = await user.getIdToken();
-      final response = await http.post(
-        Uri.parse('$baseUrl/collections/$collectionId/add'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'postId': postId}),
-      );
-      return response.statusCode == 201 || response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
+    return false;
   }
 
   Future<bool> removePostFromCollection(int collectionId, int postId) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-      final token = await user.getIdToken();
-      final response = await http.delete(
-        Uri.parse('$baseUrl/collections/$collectionId/remove/$postId'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
+    return false;
   }
 
   Future<List<Map<String, dynamic>>> getPostsByCollection(int collectionId) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return [];
-      final token = await user.getIdToken();
-      final response = await http.get(
-        Uri.parse('$baseUrl/collections/$collectionId/posts'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
-      }
-      return [];
-    } catch (e) {
-      return [];
-    }
+    return [];
   }
 
   Future<bool> deleteCollection(int collectionId) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-      final token = await user.getIdToken();
-      final response = await http.delete(
-        Uri.parse('$baseUrl/collections/$collectionId'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
+    return false;
   }
 
   Future<bool> updateCollection(int collectionId, String name) async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-      final token = await user.getIdToken();
-      final response = await http.put(
-        Uri.parse('$baseUrl/collections/$collectionId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'name': name}),
-      );
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
+    return false;
   }
 
   Future<Map<String, dynamic>?> uploadPostMedia(String filePath) async {
@@ -324,189 +243,143 @@ class PostService {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return null;
 
-      final token = await user.getIdToken();
-      
-      final fileName = filePath.split('/').last;
-      final formData = dio.FormData.fromMap({
-        'media': await dio.MultipartFile.fromFile(filePath, filename: fileName),
-      });
+      final file = File(filePath);
+      final bytes = await file.readAsBytes();
+      final ext = filePath.split('.').last.toLowerCase();
+      final fileName = '${user.uid}_post_${DateTime.now().millisecondsSinceEpoch}.$ext';
 
-      final response = await _dio.post(
-        '$baseUrl/upload',
-        data: formData,
-        options: dio.Options(
-          headers: {'Authorization': 'Bearer $token'},
-        ),
-      );
+      await app_config.Config.supabase.storage.from('posts').uploadBinary(fileName, bytes);
+      final publicUrl = app_config.Config.supabase.storage.from('posts').getPublicUrl(fileName);
 
-      if (response.statusCode == 200) {
-        return response.data;
-      }
-      return null;
+      return {
+        'url': publicUrl,
+        'type': ext == 'mp4' || ext == 'mov' ? 'video' : 'image',
+      };
     } catch (e) {
-      print('Error uploading post media with Dio: $e');
+      print('PostService: Error uploading post media: $e');
       return null;
     }
   }
 
-  Future<Map<String, dynamic>?> addComment(int postId, String content, {int? parentCommentId}) async {
+  Future<Map<String, dynamic>?> addComment(
+    int postId,
+    String content, {
+    int? parentCommentId,
+  }) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return null;
 
-      final token = await user.getIdToken();
-      final response = await http.post(
-        Uri.parse('$baseUrl/$postId/comment'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          'content': content,
-          'parentCommentId': parentCommentId,
-        }),
-      );
+      final inserted = await app_config.Config.supabase.from('comments').insert({
+        'postId': postId,
+        'userUid': user.uid,
+        'content': content,
+        'parentCommentId': parentCommentId,
+        'createdAt': DateTime.now().toIso8601String(),
+      }).select().single();
 
-      if (response.statusCode == 201) {
-        return jsonDecode(response.body);
-      }
-      return null;
+      return inserted;
     } catch (e) {
-      print('Error adding comment: $e');
+      print('PostService: Error adding comment: $e');
       return null;
     }
   }
 
   Future<Map<String, dynamic>?> updatePost(int postId, String content) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return null;
-
-      final token = await user.getIdToken();
-      final response = await http.put(
-        Uri.parse('$baseUrl/$postId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'content': content}),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      }
-      return null;
+      final updated = await app_config.Config.supabase
+          .from('posts')
+          .update({'content': content})
+          .eq('id', postId)
+          .select()
+          .single();
+      return updated;
     } catch (e) {
-      print('Error updating post: $e');
+      print('PostService: Error updating post: $e');
       return null;
     }
   }
 
   Future<bool> deletePost(int postId) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-
-      final token = await user.getIdToken();
-      final response = await http.delete(
-        Uri.parse('$baseUrl/$postId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-
-      return response.statusCode == 200;
+      await app_config.Config.supabase.from('posts').delete().eq('id', postId);
+      return true;
     } catch (e) {
-      print('Error deleting post: $e');
+      print('PostService: Error deleting post: $e');
       return false;
     }
   }
 
   Future<Map<String, dynamic>?> getPostById(int postId) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return null;
-
-      final token = await user.getIdToken();
-      final response = await http.get(
-        Uri.parse('$baseUrl/$postId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
+      final res = await app_config.Config.supabase
+          .from('feed_posts_view')
+          .select()
+          .eq('id', postId)
+          .maybeSingle();
+      if (res != null) {
+        return Map<String, dynamic>.from(res);
       }
       return null;
     } catch (e) {
-      print('Error fetching post by ID: $e');
+      print('PostService: Error fetching post by ID: $e');
       return null;
     }
   }
 
   Future<List<Map<String, dynamic>>> getComments(int postId) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return [];
+      final comments = await app_config.Config.supabase
+          .from('comments')
+          .select()
+          .eq('postId', postId)
+          .order('createdAt', ascending: true);
 
-      final token = await user.getIdToken();
-      final response = await http.get(
-        Uri.parse('$baseUrl/$postId/comments'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      if (comments.isEmpty) return [];
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        return data.cast<Map<String, dynamic>>();
-      }
-      return [];
+      final uids = comments.map((c) => c['userUid']).toSet().toList();
+      final users = await app_config.Config.supabase
+          .from('users')
+          .select('firebaseUid, fullName, profilePictureUrl')
+          .inFilter('firebaseUid', uids);
+
+      final userMap = {for (var u in users) u['firebaseUid']: u};
+
+      return comments.map<Map<String, dynamic>>((c) {
+        final m = Map<String, dynamic>.from(c);
+        final u = userMap[m['userUid']];
+        m['userName'] = u?['fullName'] ?? 'Athlete';
+        m['userAvatar'] = u?['profilePictureUrl'];
+        return m;
+      }).toList();
     } catch (e) {
-      print('Error fetching comments: $e');
+      print('PostService: Error fetching comments: $e');
       return [];
     }
   }
 
   Future<bool> updateComment(int commentId, String content) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-
-      final token = await user.getIdToken();
-      final response = await http.put(
-        Uri.parse('$baseUrl/comments/$commentId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'content': content}),
-      );
-
-      return response.statusCode == 200;
+      await app_config.Config.supabase
+          .from('comments')
+          .update({'content': content})
+          .eq('id', commentId);
+      return true;
     } catch (e) {
-      print('Error updating comment: $e');
+      print('PostService: Error updating comment: $e');
       return false;
     }
   }
 
   Future<bool> deleteComment(int commentId) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-
-      final token = await user.getIdToken();
-      final response = await http.delete(
-        Uri.parse('$baseUrl/comments/$commentId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-
-      return response.statusCode == 200;
+      await app_config.Config.supabase
+          .from('comments')
+          .delete()
+          .eq('id', commentId);
+      return true;
     } catch (e) {
-      print('Error deleting comment: $e');
+      print('PostService: Error deleting comment: $e');
       return false;
     }
   }

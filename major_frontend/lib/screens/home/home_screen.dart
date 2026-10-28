@@ -87,18 +87,26 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       
-      // 1. Try Fetching from Backend (Source of Truth)
-      final token = await AuthService().getCurrentUserToken();
-      if (token != null) {
-        final response = await http.get(
-          Uri.parse('${app_config.Config.baseUrl}/api/workouts/personalized-plans'),
-          headers: {'Authorization': 'Bearer $token'},
-        ).timeout(const Duration(seconds: 10));
-
-        if (response.statusCode == 200) {
-          final List<dynamic> backendPlans = jsonDecode(response.body);
+      // 1. Try Fetching from Supabase (Source of Truth)
+      final authUser = fb.FirebaseAuth.instance.currentUser;
+      if (authUser != null) {
+        final res = await app_config.Config.supabase
+            .from('user_plans')
+            .select()
+            .eq('userUid', authUser.uid)
+            .order('createdAt', ascending: false);
+        if (res.isNotEmpty) {
+          List<dynamic> backendPlans = [];
+          for (var row in res) {
+            if (row['planData'] != null) {
+              try {
+                final parsed = jsonDecode(row['planData']);
+                if (parsed is List) backendPlans.addAll(parsed);
+                else if (parsed is Map) backendPlans.add(parsed);
+              } catch (_) {}
+            }
+          }
           if (backendPlans.isNotEmpty) {
-            print('Home Screen: Loaded ${backendPlans.length} plans from backend');
             if (mounted) {
               setState(() {
                 suggestedPlans = backendPlans;
@@ -106,8 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               });
               _preloadAllPlans();
             }
-            // Sync local cache
-            await prefs.setString('suggested_plans', response.body);
+            await prefs.setString('suggested_plans', jsonEncode(backendPlans));
             return;
           }
         }
@@ -164,25 +171,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _savePlansToBackend(List<dynamic> plansJson) async {
     try {
-      final token = await AuthService().getCurrentUserToken();
-      if (token == null) return;
+      final authUser = fb.FirebaseAuth.instance.currentUser;
+      if (authUser == null) return;
 
-      final response = await http.post(
-        Uri.parse('${app_config.Config.baseUrl}/api/workouts/personalized-plans'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'plans': plansJson}),
-      ).timeout(const Duration(seconds: 15));
-
-      if (response.statusCode == 200) {
-        print('Home Screen: Successfully saved plans to backend');
-      } else {
-        print('Home Screen: Failed to save plans to backend: ${response.statusCode}');
-      }
+      await app_config.Config.supabase.from('user_plans').insert({
+        'userUid': authUser.uid,
+        'planData': jsonEncode(plansJson),
+        'isAI': false,
+        'createdAt': DateTime.now().toIso8601String(),
+      });
+      print('Home Screen: Successfully saved plans to Supabase');
     } catch (e) {
-      print('Error saving plans to backend: $e');
+      print('Error saving plans to Supabase: $e');
     }
   }
 

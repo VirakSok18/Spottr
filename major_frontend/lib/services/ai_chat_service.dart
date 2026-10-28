@@ -1,88 +1,48 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'config.dart' as app_config;
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AIChatService {
-  static const String _apiKey = 'YOUR_GROQ_API_KEY';
+  static const String _apiKey = String.fromEnvironment('GROQ_API_KEY', defaultValue: '');
   static const String _baseUrl = 'https://api.groq.com/openai/v1/chat/completions';
   static const String _model = 'llama-3.3-70b-versatile';
-  static String get _localBaseUrl => '${app_config.Config.baseUrl}/api/ai-coach';
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  Future<String?> _getToken() async {
-    return _auth.currentUser?.getIdToken();
-  }
-
-
-  // --- Backend Persistence & Usage Calls ---
+  // --- Free Standalone Usage Calls ---
 
   Future<Map<String, dynamic>> getUsageInfo() async {
-    final token = await _getToken();
-    try {
-      final response = await http.get(
-        Uri.parse('$_localBaseUrl/usage'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      }
-    } catch (e) {
-      print('Error fetching usage info: $e');
-    }
-    return {'isPremium': false, 'limits': []};
+    return {'isPremium': true, 'limits': []};
   }
 
   Future<void> incrementUsage(String limitType) async {
-    final token = await _getToken();
-    try {
-      await http.post(
-        Uri.parse('$_localBaseUrl/increment-usage'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'limitType': limitType}),
-      );
-    } catch (e) {
-      print('Error incrementing usage: $e');
-    }
+    // 100% Free Forever: No limits
   }
 
   Future<List<Map<String, String>>> getCoachHistory() async {
-    final token = await _getToken();
     try {
-      final response = await http.get(
-        Uri.parse('$_localBaseUrl/messages'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
+      final prefs = await SharedPreferences.getInstance();
+      final historyStr = prefs.getString('ai_coach_history');
+      if (historyStr != null) {
+        final List<dynamic> data = jsonDecode(historyStr);
         return data.map((m) => {
           'role': m['role'].toString(),
           'content': m['content'].toString(),
         }).toList();
       }
     } catch (e) {
-      print('Error fetching history: $e');
+      print('Error fetching coach history: $e');
     }
     return [];
   }
 
   Future<void> saveCoachMessage(String role, String content) async {
-    final token = await _getToken();
     try {
-      await http.post(
-        Uri.parse('$_localBaseUrl/messages'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({'role': role, 'content': content}),
-      );
+      final prefs = await SharedPreferences.getInstance();
+      final history = await getCoachHistory();
+      history.add({'role': role, 'content': content});
+      if (history.length > 50) history.removeAt(0);
+      await prefs.setString('ai_coach_history', jsonEncode(history));
     } catch (e) {
-      print('Error saving message: $e');
+      print('Error saving coach message: $e');
     }
   }
 
@@ -92,40 +52,33 @@ class AIChatService {
     required int duration,
     required int caloriesBurned,
   }) async {
-    final token = await _getToken();
     try {
-      await http.post(
-        Uri.parse('$_localBaseUrl/log-workout'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          'workoutName': workoutName,
-          'exercises': exercises,
-          'duration': duration,
-          'caloriesBurned': caloriesBurned,
-        }),
-      );
+      final prefs = await SharedPreferences.getInstance();
+      final listStr = prefs.getString('user_workout_history') ?? '[]';
+      final List<dynamic> list = jsonDecode(listStr);
+      list.add({
+        'workoutName': workoutName,
+        'exercises': exercises,
+        'duration': duration,
+        'caloriesBurned': caloriesBurned,
+        'timestamp': DateTime.now().toIso8601String(),
+      });
+      await prefs.setString('user_workout_history', jsonEncode(list));
     } catch (e) {
       print('Error logging workout: $e');
     }
   }
 
   Future<List<dynamic>> getWorkoutHistory({int limit = 5}) async {
-    final token = await _getToken();
     try {
-      final response = await http.get(
-        Uri.parse('$_localBaseUrl/workout-history?limit=$limit'),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      }
+      final prefs = await SharedPreferences.getInstance();
+      final listStr = prefs.getString('user_workout_history') ?? '[]';
+      final List<dynamic> list = jsonDecode(listStr);
+      return list.reversed.take(limit).toList();
     } catch (e) {
       print('Error fetching workout history: $e');
+      return [];
     }
-    return [];
   }
 
   // --- AI Model Calls ---
@@ -160,7 +113,7 @@ Do NOT discuss other exercises, workout plans, or unrelated topics.''';
       : workoutHistory.map((h) => "- ${h['workoutName']} in ${h['duration']}m").join("\n");
 
     final systemPrompt = '''
-You are "Gym Bot", the ultimate premium AI Fitness Coach for the FitFinder app.
+You are "Gym Bot", the ultimate AI Fitness Coach for Spottr.
 
 USER PROFILE:
 - Name: ${userProfile['fullName'] ?? 'Athlete'}
@@ -178,14 +131,8 @@ CORE RESPONSIBILITIES:
 4. Give fitness-focused nutrition advice.
 5. Track progress and suggest intensity adjustments.
 
-STRICT REFUSAL POLICY (GUARDRAILS):
-- You are a FITNESS COACH. You do NOT talk about politics, history, general news, or personal relationship advice. 
-- If asked about these topics, politely decline: "I'm just a gym bot! I can only help you with workouts and nutrition. Let's get back to the gains! 💪"
-- DO NOT generate essays on non-fitness topics.
-- DO NOT answer questions like "Who is the president?" or "Write me a poem about love."
-
 STRICT RULES:
-- Be encouraging, professional, and slightly energetic (bro-science vibes but backed by facts).
+- Be encouraging, professional, and slightly energetic.
 - If asked to create a plan, provide a clear structured list.
 - Keep responses concise but impactful.
 - ONLY discuss fitness, health, nutrition, and motivation.
@@ -196,6 +143,10 @@ Always refer to the user by their name if available.''';
   }
 
   Future<String> _getGroqResponse(String systemPrompt, List<Map<String, String>> history, String userMessage) async {
+    if (_apiKey.isEmpty) {
+      return "Hi athlete! I am your Spottr AI Coach. For proper form, remember to keep your core engaged, maintain a steady breathing rhythm, and control the eccentric movement. You've got this! 💪";
+    }
+
     final messages = [
       {'role': 'system', 'content': systemPrompt},
       ...history,

@@ -26,7 +26,7 @@ class _AICoachChatPanelState extends State<AICoachChatPanel> {
   bool _isLoading = false;
   int _messageCount = 0;
   int _maxMessages = 30;
-  bool _isPremium = false;
+  bool _isPremium = true;
   bool _showLimitPopup = false;
 
   final List<String> _defaultQuestions = [

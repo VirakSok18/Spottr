@@ -140,28 +140,15 @@ class NotificationService {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return;
-      
+
       String? fcmToken = await _fcm.getToken();
       if (fcmToken == null) return;
 
-      final token = await user.getIdToken();
-
-      final response = await http.post(
-        Uri.parse('${app_config.Config.baseUrl}/api/users/fcm-token'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-        body: jsonEncode({
-          'fcmToken': fcmToken,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        print('FCM Token updated on server');
-      } else {
-        print('Failed to update FCM token: ${response.statusCode}');
-      }
+      await app_config.Config.supabase
+          .from('users')
+          .update({'fcmToken': fcmToken})
+          .eq('firebaseUid', user.uid);
+      print('FCM Token updated on Supabase');
     } catch (e) {
       print('Error updating FCM token: $e');
     }
@@ -171,39 +158,28 @@ class NotificationService {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return [];
-      final token = await user.getIdToken();
 
-      final response = await http.get(
-        Uri.parse('${app_config.Config.baseUrl}/api/notifications'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      final res = await app_config.Config.supabase
+          .from('notifications')
+          .select()
+          .eq('recipientUid', user.uid)
+          .order('createdAt', ascending: false);
 
-      if (response.statusCode == 200) {
-        List<dynamic> notifications = jsonDecode(response.body);
-        unreadCount.value = notifications.where((n) => n['isRead'] == 0 || n['isRead'] == false).length;
-        return notifications;
-      }
+      unreadCount.value = res.where((n) => n['isRead'] == 0 || n['isRead'] == false).length;
+      return res;
     } catch (e) {
       print('Error fetching notifications: $e');
+      return [];
     }
-    return [];
   }
 
   Future<void> markAsRead(String notificationId) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return;
-      final token = await user.getIdToken();
-
-      await http.put(
-        Uri.parse('${app_config.Config.baseUrl}/api/notifications/$notificationId/read'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      getNotifications(); // Refresh
+      await app_config.Config.supabase
+          .from('notifications')
+          .update({'isRead': true})
+          .eq('id', notificationId);
+      getNotifications();
     } catch (e) {
       print('Error marking notification as read: $e');
     }
@@ -213,14 +189,11 @@ class NotificationService {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return;
-      final token = await user.getIdToken();
 
-      await http.put(
-        Uri.parse('${app_config.Config.baseUrl}/api/notifications/read-all'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+      await app_config.Config.supabase
+          .from('notifications')
+          .update({'isRead': true})
+          .eq('recipientUid', user.uid);
       unreadCount.value = 0;
     } catch (e) {
       print('Error marking all as read: $e');
@@ -229,17 +202,11 @@ class NotificationService {
 
   Future<bool> deleteNotification(String id) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-      final token = await user.getIdToken();
-
-      final response = await http.delete(
-        Uri.parse('${app_config.Config.baseUrl}/api/notifications/$id'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      return response.statusCode == 200;
+      await app_config.Config.supabase
+          .from('notifications')
+          .delete()
+          .eq('id', id);
+      return true;
     } catch (e) {
       print('Error deleting notification: $e');
       return false;
@@ -248,21 +215,11 @@ class NotificationService {
 
   Future<bool> deleteMultipleNotifications(List<String> ids) async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return false;
-      final token = await user.getIdToken();
-
-      final response = await http.post(
-        Uri.parse('${app_config.Config.baseUrl}/api/notifications/delete-multiple'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-        body: jsonEncode({
-          'ids': ids.map((id) => int.parse(id)).toList(),
-        }),
-      );
-      return response.statusCode == 200;
+      await app_config.Config.supabase
+          .from('notifications')
+          .delete()
+          .inFilter('id', ids.map((id) => int.tryParse(id) ?? id).toList());
+      return true;
     } catch (e) {
       print('Error deleting multiple notifications: $e');
       return false;
@@ -273,20 +230,13 @@ class NotificationService {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) return false;
-      final token = await user.getIdToken();
 
-      final response = await http.delete(
-        Uri.parse('${app_config.Config.baseUrl}/api/notifications'),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      
-      if (response.statusCode == 200) {
-        unreadCount.value = 0;
-        return true;
-      }
-      return false;
+      await app_config.Config.supabase
+          .from('notifications')
+          .delete()
+          .eq('recipientUid', user.uid);
+      unreadCount.value = 0;
+      return true;
     } catch (e) {
       print('Error clearing notifications: $e');
       return false;

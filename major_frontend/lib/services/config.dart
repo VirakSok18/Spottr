@@ -1,30 +1,16 @@
-import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Config {
-  static const List<String> _candidates = [
-    'https://instrumentally-unoffered-bambi.ngrok-free.dev',
-    'http://172.20.10.3:5000',
-    'http://192.168.100.46:5000',
-  ];
+  static const String supabaseUrl = 'https://movymmlayggqzjtunlfk.supabase.co';
+  static const String supabaseAnonKey =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vdnltbWxheWdncXpqdHVubGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjY1MDYsImV4cCI6MjEwODc0MjUwNn0.wnYGxn8vr3EvMMVe__qeTrurkLmCP2-5UsqKA9y9tLw';
 
-  static String _baseUrl = _candidates[0];
+  static String get baseUrl => supabaseUrl;
 
-  static String get baseUrl => _baseUrl;
+  static SupabaseClient get supabase => Supabase.instance.client;
 
   static Future<void> init() async {
-    print('Config: Initializing baseUrl...');
-    for (String url in _candidates) {
-      try {
-        final response = await http.get(Uri.parse('$url/health')).timeout(const Duration(seconds: 2));
-        if (response.statusCode == 200) {
-          _baseUrl = url;
-          print('Config: Successfully connected to $url');
-          return;
-        }
-      } catch (e) {
-        print('Config: Failed to connect to $url: $e');
-      }
-    }
-    print('Config: Using default fallback: $_baseUrl');
+    // Zero backend: Supabase connects directly
+    print('Config: Standalone frontend initialized with Supabase: $supabaseUrl');
   }
 }

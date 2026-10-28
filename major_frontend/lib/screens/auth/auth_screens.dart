@@ -28,7 +28,7 @@ class AuthService {
   static Stream<void> get profileUpdates => _profileUpdateController.stream;
 
   // Granular Premium Status Notifier
-  static final ValueNotifier<bool> isPremiumUser = ValueNotifier<bool>(false);
+  static final ValueNotifier<bool> isPremiumUser = ValueNotifier<bool>(true);
 
   static void notifyProfileUpdate() {
     _profileUpdateController.add(null);
@@ -236,82 +236,50 @@ class AuthService {
         return null;
       }
 
-      print('AuthService: Getting ID token for ${user.uid}');
-      final token = await user.getIdToken().timeout(
-        const Duration(seconds: 10),
-      );
-      int retryCount = 0;
-      const int maxRetries = 4;
+      final res = await app_config.Config.supabase
+          .from('users')
+          .select()
+          .eq('firebaseUid', user.uid)
+          .maybeSingle();
 
-      while (retryCount < maxRetries) {
-        print('AuthService: Fetching profile (Attempt ${retryCount + 1})');
-        final response = await http
-            .get(
-              Uri.parse('$baseUrl/profile'),
-              headers: {'Authorization': 'Bearer $token'},
-            )
-            .timeout(const Duration(seconds: 10));
-
-        print('AuthService: Response ${response.statusCode}');
-
-        if (response.statusCode == 200) {
-          final profile = jsonDecode(response.body);
-          updatePremiumStatus(
-            profile['isPremium'] == true || profile['isPremium'] == 1,
-          );
-          return profile;
-        } else if (response.statusCode == 404) {
-          retryCount++;
-          if (retryCount < maxRetries) {
-            print(
-              'AuthService: User not found yet (Syncing...), retrying in 1s...',
-            );
-            await Future.delayed(const Duration(milliseconds: 1000));
-            continue;
-          }
-          print('AuthService: User not found after $maxRetries attempts.');
-          return null;
-        } else {
-          print('AuthService: Unexpected status ${response.statusCode}');
-          return null;
-        }
+      if (res != null) {
+        final profile = Map<String, dynamic>.from(res);
+        profile['isPremium'] = true;
+        updatePremiumStatus(true);
+        return profile;
       }
-      return null;
-    } on FirebaseAuthException catch (e) {
-      print('AuthService: Auth Error in getUserProfile: ${e.code}');
-      if (e.code == 'user-not-found' ||
-          e.code == 'user-disabled' ||
-          e.code == 'invalid-credential') {
-        await signOut();
+
+      // If user profile not found, auto-sync and re-query
+      await _syncUserWithBackend(user);
+      final synced = await app_config.Config.supabase
+          .from('users')
+          .select()
+          .eq('firebaseUid', user.uid)
+          .maybeSingle();
+      if (synced != null) {
+        final profile = Map<String, dynamic>.from(synced);
+        profile['isPremium'] = true;
+        updatePremiumStatus(true);
+        return profile;
       }
       return null;
     } catch (e) {
-      print('AuthService: getUserProfile generic error: $e');
+      print('AuthService: getUserProfile error: $e');
       return null;
     }
   }
 
   Future<Map<String, dynamic>?> getUserProfileByUid(String uid) async {
     try {
-      final user = _auth.currentUser;
-      if (user == null) return null;
+      final res = await app_config.Config.supabase
+          .from('users')
+          .select()
+          .eq('firebaseUid', uid)
+          .maybeSingle();
 
-      final token = await user.getIdToken();
-      final response = await http
-          .get(
-            Uri.parse('$baseUrl/profile/$uid'),
-            headers: {'Authorization': 'Bearer $token'},
-          )
-          .timeout(const Duration(seconds: 10));
-
-      if (response.statusCode == 200) {
-        final profile = jsonDecode(response.body);
-        // Only update global notifier if fetching self
-        if (uid == FirebaseAuth.instance.currentUser?.uid) {
-          updatePremiumStatus(
-            profile['isPremium'] == true || profile['isPremium'] == 1,
-          );
-        }
+      if (res != null) {
+        final profile = Map<String, dynamic>.from(res);
+        profile['isPremium'] = true;
         return profile;
       }
       return null;
@@ -322,19 +290,18 @@ class AuthService {
   }
 
   Future<List<Map<String, dynamic>>> getMatches() async {
-    final token = await FirebaseAuth.instance.currentUser?.getIdToken();
-    final response = await http.get(
-      Uri.parse('$baseUrl/matches'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return List<Map<String, dynamic>>.from(jsonDecode(response.body));
+    try {
+      final user = _auth.currentUser;
+      final res = await app_config.Config.supabase
+          .from('users')
+          .select()
+          .neq('firebaseUid', user?.uid ?? '')
+          .limit(30);
+      return List<Map<String, dynamic>>.from(res);
+    } catch (e) {
+      print('AuthService: getMatches error: $e');
+      return [];
     }
-    return [];
   }
 
   Future<String?> updateProfile(Map<String, dynamic> data) async {
@@ -342,31 +309,19 @@ class AuthService {
       final user = _auth.currentUser;
       if (user == null) return 'No user logged in';
 
-      print('Updating profile with data: $data'); // Debug log
+      final cleanData = Map<String, dynamic>.from(data);
+      cleanData['updatedAt'] = DateTime.now().toIso8601String();
+      cleanData['isPremium'] = true;
 
-      final token = await user.getIdToken();
-      final response = await http
-          .put(
-            Uri.parse('$baseUrl/profile'),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $token',
-            },
-            body: jsonEncode(data),
-          )
-          .timeout(const Duration(seconds: 10));
+      await app_config.Config.supabase
+          .from('users')
+          .update(cleanData)
+          .eq('firebaseUid', user.uid);
 
-      print(
-        'Update response: ${response.statusCode} - ${response.body}',
-      ); // Debug log
-
-      if (response.statusCode != 200) {
-        return 'Failed to update profile: ${response.statusCode} - ${response.body}';
-      }
       notifyProfileUpdate();
       return null;
     } catch (e) {
-      print('Update profile error: $e'); // Debug log
+      print('Update profile error: $e');
       return 'Update error: $e';
     }
   }
@@ -377,29 +332,18 @@ class AuthService {
     String? phone,
   }) async {
     try {
-      final token = await user.getIdToken().timeout(
-        const Duration(seconds: 10),
-      );
+      await app_config.Config.supabase.from('users').upsert({
+        'firebaseUid': user.uid,
+        'fullName': fullName ?? user.displayName ?? 'Spottr Athlete',
+        'email': user.email,
+        'phone': phone,
+        'isPremium': true,
+        'planType': 'free_pro',
+        'is_setup_completed': true,
+        'createdAt': DateTime.now().toIso8601String(),
+        'updatedAt': DateTime.now().toIso8601String(),
+      }, onConflict: 'firebaseUid');
 
-      final body = {'fullName': fullName ?? user.displayName, 'phone': phone};
-      body.removeWhere((key, value) => value == null);
-
-      final response = await http
-          .post(
-            Uri.parse('$baseUrl/sync'),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $token',
-            },
-            body: jsonEncode(body),
-          )
-          .timeout(const Duration(seconds: 10));
-
-      if (response.statusCode != 200) {
-        return 'Backend sync failed: ${response.statusCode}';
-      }
-
-      // Update FCM Token
       try {
         await NotificationService().updateTokenOnServer(user.uid);
       } catch (e) {
@@ -408,6 +352,7 @@ class AuthService {
 
       return null;
     } catch (e) {
+      print('Sync error: $e');
       return 'Sync error: $e';
     }
   }
@@ -440,35 +385,23 @@ class AuthService {
       final user = _auth.currentUser;
       if (user == null) return 'No user logged in';
 
-      final token = await user.getIdToken();
-      final uri = Uri.parse('$baseUrl/profile/upload');
+      final file = File(filePath);
+      final bytes = await file.readAsBytes();
+      final ext = filePath.split('.').last;
+      final fileName = '${user.uid}_avatar_${DateTime.now().millisecondsSinceEpoch}.$ext';
 
-      var request = http.MultipartRequest('POST', uri);
-      request.headers['Authorization'] = 'Bearer $token';
+      await app_config.Config.supabase.storage.from('avatars').uploadBinary(fileName, bytes);
+      final publicUrl = app_config.Config.supabase.storage.from('avatars').getPublicUrl(fileName);
 
-      var file = await http.MultipartFile.fromPath(
-        'profilePicture',
-        filePath,
-        contentType: MediaType(
-          'image',
-          'jpeg',
-        ), // Cloudinary will handle it anyway
-      );
+      await app_config.Config.supabase.from('users').update({
+        'profilePictureUrl': publicUrl,
+        'updatedAt': DateTime.now().toIso8601String(),
+      }).eq('firebaseUid', user.uid);
 
-      request.files.add(file);
-
-      var streamedResponse = await request.send().timeout(
-        const Duration(seconds: 30),
-      );
-      var response = await http.Response.fromStream(streamedResponse);
-
-      if (response.statusCode == 200) {
-        notifyProfileUpdate();
-        return null; // Success
-      } else {
-        return 'Upload failed: ${response.statusCode}';
-      }
+      notifyProfileUpdate();
+      return null;
     } catch (e) {
+      print('Upload profile picture error: $e');
       return 'Upload error: $e';
     }
   }
@@ -478,32 +411,23 @@ class AuthService {
       final user = _auth.currentUser;
       if (user == null) return 'No user logged in';
 
-      final token = await user.getIdToken();
-      final uri = Uri.parse('$baseUrl/profile/cover/upload');
+      final file = File(filePath);
+      final bytes = await file.readAsBytes();
+      final ext = filePath.split('.').last;
+      final fileName = '${user.uid}_cover_${DateTime.now().millisecondsSinceEpoch}.$ext';
 
-      var request = http.MultipartRequest('POST', uri);
-      request.headers['Authorization'] = 'Bearer $token';
+      await app_config.Config.supabase.storage.from('avatars').uploadBinary(fileName, bytes);
+      final publicUrl = app_config.Config.supabase.storage.from('avatars').getPublicUrl(fileName);
 
-      var file = await http.MultipartFile.fromPath(
-        'coverPhoto',
-        filePath,
-        contentType: MediaType('image', 'jpeg'),
-      );
+      await app_config.Config.supabase.from('users').update({
+        'coverPhotoUrl': publicUrl,
+        'updatedAt': DateTime.now().toIso8601String(),
+      }).eq('firebaseUid', user.uid);
 
-      request.files.add(file);
-
-      var streamedResponse = await request.send().timeout(
-        const Duration(seconds: 30),
-      );
-      var response = await http.Response.fromStream(streamedResponse);
-
-      if (response.statusCode == 200) {
-        notifyProfileUpdate();
-        return null; // Success
-      } else {
-        return 'Upload failed: ${response.statusCode}';
-      }
+      notifyProfileUpdate();
+      return null;
     } catch (e) {
+      print('Upload cover photo error: $e');
       return 'Upload error: $e';
     }
   }

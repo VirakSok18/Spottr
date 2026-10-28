@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'services/notification_service.dart';
@@ -37,6 +38,11 @@ void main() async {
     
     // Initialize Config and find workign IP
     await app_config.Config.init();
+    await Supabase.initialize(
+      url: app_config.Config.supabaseUrl,
+      anonKey: app_config.Config.supabaseAnonKey,
+    );
+    print('Supabase initialized');
     
     // Initialize Notification Service
     await NotificationService().initialize();

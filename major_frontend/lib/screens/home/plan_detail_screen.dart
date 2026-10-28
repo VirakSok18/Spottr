@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'dart:convert';
 import '../auth/auth_screens.dart';
 import '../../services/config.dart' as app_config;
@@ -60,33 +61,29 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
       });
     }
 
-    // 2. Fetch from Backend (Source of Truth)
+    // 2. Fetch from Supabase (Source of Truth)
     try {
-      final token = await AuthService().getCurrentUserToken();
-      if (token != null) {
-        final response = await http.get(
-          Uri.parse('${app_config.Config.baseUrl}/api/workouts/progress/$planTitle'),
-          headers: {'Authorization': 'Bearer $token'},
-        ).timeout(const Duration(seconds: 10));
+      final user = fb.FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final res = await app_config.Config.supabase
+            .from('workout_day_progress')
+            .select('dayNumber')
+            .eq('firebaseUid', user.uid)
+            .eq('planTitle', planTitle);
 
-        if (response.statusCode == 200) {
-          final List<dynamic> backendCompleted = jsonDecode(response.body)['completedDays'];
-          final Set<int> backendSet = backendCompleted.map((e) => e as int).toSet();
-          
-          if (mounted) {
-            setState(() {
-              completedDays = backendSet;
-            });
-            // Sync local cache
-            await prefs.setStringList(
-              'completed_days_$planTitle',
-              completedDays.map((e) => e.toString()).toList(),
-            );
-          }
+        final Set<int> backendSet = res.map<int>((e) => (e['dayNumber'] as num).toInt()).toSet();
+        if (mounted) {
+          setState(() {
+            completedDays = backendSet;
+          });
+          await prefs.setStringList(
+            'completed_days_$planTitle',
+            completedDays.map((e) => e.toString()).toList(),
+          );
         }
       }
     } catch (e) {
-      print('PlanDetailScreen: Error loading progress from backend: $e');
+      print('PlanDetailScreen: Error loading progress from Supabase: $e');
     }
   }
 
@@ -107,26 +104,18 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
   Future<void> _saveDayProgressToBackend(int dayNumber) async {
     try {
       final planTitle = widget.plan['title'] ?? 'default_plan';
-      final token = await AuthService().getCurrentUserToken();
-      if (token == null) return;
+      final user = fb.FirebaseAuth.instance.currentUser;
+      if (user == null) return;
 
-      final response = await http.post(
-        Uri.parse('${app_config.Config.baseUrl}/api/workouts/progress'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          'planTitle': planTitle,
-          'dayNumber': dayNumber,
-        }),
-      ).timeout(const Duration(seconds: 10));
-
-      if (response.statusCode == 200) {
-        print('PlanDetailScreen: Successfully saved progress for day $dayNumber to backend');
-      }
+      await app_config.Config.supabase.from('workout_day_progress').upsert({
+        'firebaseUid': user.uid,
+        'planTitle': planTitle,
+        'dayNumber': dayNumber,
+        'completedAt': DateTime.now().toIso8601String(),
+      });
+      print('PlanDetailScreen: Successfully saved progress for day $dayNumber to Supabase');
     } catch (e) {
-      print('PlanDetailScreen: Error saving progress to backend: $e');
+      print('PlanDetailScreen: Error saving progress to Supabase: $e');
     }
   }
 

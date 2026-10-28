@@ -20,7 +20,7 @@ class WorkoutPreviewScreen extends StatefulWidget {
 }
 
 class _WorkoutPreviewScreenState extends State<WorkoutPreviewScreen> {
-  bool _isPremium = false;
+  bool _isPremium = true;
   bool _isLoadingProfile = true;
 
   @override

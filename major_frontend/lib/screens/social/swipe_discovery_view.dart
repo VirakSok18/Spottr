@@ -23,7 +23,7 @@ class _SwipeDiscoveryViewState extends State<SwipeDiscoveryView> {
   final PageController _pageController = PageController();
   List<Map<String, dynamic>> _matches = [];
   bool _isLoading = true;
-  bool _isPremium = false;
+  bool _isPremium = true;
   int _swipeCount = 0;
   StreamSubscription? _profileSubscription;
 
