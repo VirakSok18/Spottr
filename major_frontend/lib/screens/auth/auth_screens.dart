@@ -770,36 +770,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 40),
-
-                        const Text(
-                          'Sign in with',
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
-                        const SizedBox(height: 16),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _SocialButton(
-                              assetPath: 'assets/images/facebook.png',
-                              onPressed: _isLoading
-                                  ? () {}
-                                  : () => _handleSocialSignIn(
-                                      _authService.signInWithFacebook,
-                                    ),
-                            ),
-                            const SizedBox(width: 16),
-                            _SocialButton(
-                              assetPath: 'assets/images/google.png',
-                              onPressed: _isLoading
-                                  ? () {}
-                                  : () => _handleSocialSignIn(
-                                      _authService.signInWithGoogle,
-                                    ),
-                            ),
-                          ],
-                        ),
+                        const SizedBox(height: 24),
 
                         const Spacer(),
 
@@ -948,7 +919,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     setState(() => _isLoading = true);
 
-    // Step 1: Send OTP
+    // Send real OTP email via Vercel (spottrnoreply@gmail.com)
     final error = await _authService.sendSignupOTP(email);
 
     if (!mounted) return;
@@ -966,7 +937,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             email: email,
             password: password,
             name: name,
-            phone: '+${_countryCodeController.text}$phone', // Use typed code
+            phone: '+${_countryCodeController.text}$phone',
           ),
         ),
       );
@@ -1391,36 +1362,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                           ),
                         ),
-                        const SizedBox(height: 40),
-
-                        const Text(
-                          'Sign up with',
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
-                        const SizedBox(height: 16),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _SocialButton(
-                              assetPath: 'assets/images/facebook.png',
-                              onPressed: _isLoading
-                                  ? () {}
-                                  : () => _handleSocialSignIn(
-                                      _authService.signInWithFacebook,
-                                    ),
-                            ),
-                            const SizedBox(width: 16),
-                            _SocialButton(
-                              assetPath: 'assets/images/google.png',
-                              onPressed: _isLoading
-                                  ? () {}
-                                  : () => _handleSocialSignIn(
-                                      _authService.signInWithGoogle,
-                                    ),
-                            ),
-                          ],
-                        ),
+                        const SizedBox(height: 24),
 
                         const Spacer(),
 
