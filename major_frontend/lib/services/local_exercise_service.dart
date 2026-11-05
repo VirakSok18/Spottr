@@ -155,6 +155,40 @@ class LocalExerciseService {
     }
   }
 
+  /// Fetches full exercise details by Name (fuzzy matching)
+  static Future<Exercise?> getExerciseByName(String name) async {
+    await init();
+    if (_allExercises.isEmpty || name.trim().isEmpty) return null;
+    final clean = name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+    if (clean.isEmpty) return null;
+
+    // 1. Exact clean match
+    for (final ex in _allExercises) {
+      final exClean = ex.name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+      if (exClean == clean) return ex;
+    }
+
+    // 2. Substring match
+    for (final ex in _allExercises) {
+      final exClean = ex.name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+      if (exClean.contains(clean) || clean.contains(exClean)) return ex;
+    }
+
+    // 3. Match by key word tokens (e.g. "bench", "squat", "press")
+    final queryTokens = name.toLowerCase().split(RegExp(r'[\s\-_]+')).where((w) => w.length > 2).toList();
+    if (queryTokens.isNotEmpty) {
+      for (final ex in _allExercises) {
+        final exLower = ex.name.toLowerCase();
+        if (queryTokens.every((t) => exLower.contains(t))) return ex;
+      }
+      for (final ex in _allExercises) {
+        final exLower = ex.name.toLowerCase();
+        if (queryTokens.any((t) => exLower.contains(t))) return ex;
+      }
+    }
+    return null;
+  }
+
   /// Fetches 3 static exercises (Beginner, Intermediate, Advanced) for a category
   static Future<List<Exercise>> getExercisesForClassicWorkout(String focusArea) async {
     await init();

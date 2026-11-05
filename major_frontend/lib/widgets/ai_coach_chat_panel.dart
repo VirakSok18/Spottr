@@ -104,9 +104,13 @@ class _AICoachChatPanelState extends State<AICoachChatPanel> {
     // Increment usage
     _chatService.incrementUsage('workout_chat');
 
+    final history = widget.chatHistory.length > 2
+        ? widget.chatHistory.sublist(1, widget.chatHistory.length - 1)
+        : <Map<String, String>>[];
+
     final response = await _chatService.getAIResponse(
       exerciseName: widget.exerciseName,
-      chatHistory: widget.chatHistory.sublist(1, widget.chatHistory.length - 1), 
+      chatHistory: history,
       userMessage: text,
     );
 

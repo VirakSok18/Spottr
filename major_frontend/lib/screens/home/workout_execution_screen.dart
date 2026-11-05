@@ -44,7 +44,7 @@ class _WorkoutExecutionScreenState extends State<WorkoutExecutionScreen> with Wi
   bool _isExiting = false;
 
   Map<int, YoutubePlayerController> _controllers = {};
-  final List<Map<String, String>> _aiChatHistory = []; // Add this
+  final Map<String, List<Map<String, String>>> _aiChatHistories = {};
   late DateTime _startTime;
 
   @override
@@ -577,6 +577,7 @@ class _WorkoutExecutionScreenState extends State<WorkoutExecutionScreen> with Wi
   }
 
   void _showAICoachChat(String exerciseName) {
+    final history = _aiChatHistories.putIfAbsent(exerciseName, () => []);
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -590,9 +591,9 @@ class _WorkoutExecutionScreenState extends State<WorkoutExecutionScreen> with Wi
           builder: (context, scrollController) {
             return AICoachChatPanel(
               exerciseName: exerciseName,
-              chatHistory: _aiChatHistory, // Pass history
+              chatHistory: history,
               onMessageAdded: (message) {
-                _aiChatHistory.add(message); // Maintain context
+                history.add(message);
               },
             );
           },

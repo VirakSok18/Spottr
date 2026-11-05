@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:major_frontend/services/ai_chat_service.dart';
 import 'package:major_frontend/screens/auth/auth_screens.dart'; // For AuthService
-import 'package:intl/intl.dart';
 
 class CentralAICoachScreen extends StatefulWidget {
   const CentralAICoachScreen({Key? key}) : super(key: key);
